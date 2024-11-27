@@ -92,13 +92,13 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
           ssh-keyscan -p 22 ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r frontend/dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/frontend
+          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/distQA
 
       - name: Copy back-end files to VM
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bff
+          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bffQA
 
       - name: Deploy to server
         env:
