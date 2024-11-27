@@ -82,7 +82,7 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: Copy front-end build files to VM
+      - name: Setup SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
@@ -92,13 +92,18 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
           ssh-keyscan -p 22 ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Copy front-end build files to VM
+        run: |
           sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/distQA
 
       - name: Copy back-end files to VM
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
+          echo "Copying files to VM..."
           sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bffQA
+          echo "Files copied successfully."
 
       - name: Deploy to server
         env:
