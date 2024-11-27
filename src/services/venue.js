@@ -19,3 +19,8 @@ export const updateVenue = async (id, venue) => {
   const response = await api.put(`/venue/${id}`, venue)
   return response.data
 }
+
+export const deleteVenue = async (id) => {
+  const response = await api.delete(`/venue/${id}`)
+  return response.data
+}

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getVenue, createVenue, updateVenue } from '../services/venue'
+import { getVenue, createVenue, updateVenue, deleteVenue } from '../services/venue'
 
 const route = useRoute()
 const router = useRouter()
@@ -26,6 +26,15 @@ const fetchVenue = async () => {
     } catch (error) {
       console.error('Error fetching venue:', error)
     }
+  }
+}
+
+const handleDeleteVenue = async () => {
+  try {
+    await deleteVenue(route.params.id)
+    router.push('/')
+  } catch (error) {
+    console.error('Error deleting venue:', error)
   }
 }
 
@@ -74,6 +83,7 @@ const handleSubmit = async () => {
         <input id="imageUrl" type="text" v-model="venue.imageUrl" placeholder="Enter image URL" required/>
       </div>
       <button type="submit" class="submit-btn">{{ isEditMode ? 'Update Venue' : 'Create Venue' }}</button>
+      <button v-if="isEditMode" @click="handleDeleteVenue" type="button" class="delete-btn">Delete Venue</button>
     </form>
   </div>
 </template>
@@ -151,6 +161,26 @@ textarea:focus {
 }
 
 .submit-btn:active {
+  transform: scale(0.98);
+}
+
+.delete-btn {
+  padding: 10px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+.delete-btn:active {
   transform: scale(0.98);
 }
 </style>
