@@ -24,7 +24,7 @@ onMounted(fetchVenues)
 
 const filteredVenues = computed(() => {
   return venues.value.filter(venue =>
-      venue.room.toLowerCase().includes(searchQuery.value.toLowerCase())
+      venue?.room?.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 })
 
@@ -40,7 +40,7 @@ const goToCreatePage = () => {
 <template>
   <div class="home-container">
     <div class="container">
-      <button @click="logout" class="logout-btn">Logout Na test</button>
+      <button @click="logout" class="logout-btn">Logout</button>
     </div>
     <h1 class="page-title">Venue Management</h1>
     <div class="actions">

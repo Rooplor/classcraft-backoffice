@@ -7,7 +7,7 @@ const route = useRoute()
 const router = useRouter()
 const isEditMode = ref(false)
 const venue = ref({
-  name: '',
+  room: '',
   location: {
     building: '',
     floor: 0
@@ -50,8 +50,8 @@ const handleSubmit = async () => {
     <h2 class="form-title">{{ isEditMode ? 'Edit Venue' : 'Create Venue' }}</h2>
     <form @submit.prevent="handleSubmit" class="venue-form">
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input id="name" type="text" v-model="venue.name" placeholder="Enter venue name" required/>
+        <label for="room">room:</label>
+        <input id="room" type="text" v-model="venue.room" placeholder="Enter venue room" required/>
       </div>
       <div class="form-group">
         <label for="building">Building:</label>
