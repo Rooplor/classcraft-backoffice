@@ -40,7 +40,7 @@ const goToCreatePage = () => {
 <template>
   <div class="home-container">
     <div class="container">
-      <button @click="logout" class="logout-btn">Logout</button>
+      <button @click="logout" class="logout-btn">Logout Na test</button>
     </div>
     <h1 class="page-title">Venue Management</h1>
     <div class="actions">
