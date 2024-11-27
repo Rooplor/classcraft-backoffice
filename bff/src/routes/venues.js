@@ -26,8 +26,8 @@ router.get('/venue/:id', async (req, res) => {
 
 router.post('/venue', async (req, res) => {
     try {
-        const { name, location, description, capacity, imageUrl } = req.body;
-        const newVenue = { name, location, description, capacity, imageUrl };
+        const { room, location, description, capacity, imageUrl } = req.body;
+        const newVenue = { room, location, description, capacity, imageUrl };
         const db = await connectToDatabase();
         await db.collection('venue').insertOne(newVenue);
         res.status(201).send('Venue created');
@@ -39,8 +39,8 @@ router.post('/venue', async (req, res) => {
 router.put('/venue/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, location, description, capacity, imageUrl } = req.body;
-        const updatedVenue = { name, location, description, capacity, imageUrl };
+        const { room, location, description, capacity, imageUrl } = req.body;
+        const updatedVenue = { room, location, description, capacity, imageUrl };
         const db = await connectToDatabase();
         await db.collection('venue').updateOne({ _id: new ObjectId(id) }, { $set: updatedVenue });
         res.status(200).send('Venue updated');

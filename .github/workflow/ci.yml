@@ -1,0 +1,63 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies for front-end
+        run: |
+          pnpm install
+
+      - name: Inject environment variables
+        run: |
+          touch .env
+          echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+
+      - name: Build front-end
+        run: |
+          pnpm run build
+
+      - name: Inject environment variables
+        run: |
+          cd bff
+          touch .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+
+      - name: Install dependencies for back-end
+        run: |
+          cd bff
+          pnpm install
+
+      - name: Upload front-end build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-dist
+          path: dist
+
+      - name: Upload back-end files
+        uses: actions/upload-artifact@v3
+        with:
+          name: bff
+          path: bff

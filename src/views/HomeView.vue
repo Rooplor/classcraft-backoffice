@@ -24,7 +24,7 @@ onMounted(fetchVenues)
 
 const filteredVenues = computed(() => {
   return venues.value.filter(venue =>
-      venue.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+      venue.room.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 })
 
@@ -55,7 +55,7 @@ const goToCreatePage = () => {
     <table class="venues-table">
       <thead>
       <tr>
-        <th>Name</th>
+        <th>Room</th>
         <th>Building</th>
         <th>Floor</th>
         <th>Description</th>
@@ -65,7 +65,7 @@ const goToCreatePage = () => {
       </thead>
       <tbody>
       <tr v-for="venue in filteredVenues" :key="venue._id">
-        <td>{{ venue.name }}</td>
+        <td>{{ venue.room }}</td>
         <td>{{ venue.location?.building || 'N/A' }}</td>
         <td>{{ venue.location?.floor || 'N/A' }}</td>
         <td>{{ venue.description || 'N/A' }}</td>
