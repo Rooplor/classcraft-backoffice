@@ -38,155 +38,43 @@ const goToCreatePage = () => {
 </script>
 
 <template>
-  <div class="home-container">
-    <div class="container">
-      <button @click="logout" class="logout-btn">Logout</button>
+  <div class="home-container p-5 max-w-5xl mx-auto bg-white shadow-md rounded-lg">
+    <div class="container flex justify-end">
+      <button @click="logout" class="logout-btn px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded-md transition-colors duration-300 hover:bg-red-700">Logout</button>
     </div>
-    <h1 class="page-title">Venue Management</h1>
-    <div class="actions">
+    <h1 class="page-title text-2xl font-semibold text-center mb-5 text-gray-800">Venue Management</h1>
+    <div class="actions flex justify-between mb-5 gap-2">
       <input
           type="text"
           v-model="searchQuery"
           placeholder="Search venues..."
-          class="search-input"
+          class="search-input flex-1 p-2 text-base border border-gray-300 rounded-md box-border"
       />
-      <button @click="goToCreatePage" class="create-btn">Create Venue</button>
+      <button @click="goToCreatePage" class="create-btn px-5 py-2 bg-blue-600 text-white text-base font-semibold rounded-md transition-colors duration-300 hover:bg-blue-700">Create Venue</button>
     </div>
-    <table class="venues-table">
+    <table class="venues-table w-full border-collapse rounded-lg overflow-hidden mt-2">
       <thead>
       <tr>
-        <th>Room</th>
-        <th>Building</th>
-        <th>Floor</th>
-        <th>Description</th>
-        <th>Capacity</th>
-        <th>Actions</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Room</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Building</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Floor</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Description</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Capacity</th>
+        <th class="p-3 text-left bg-gray-200 text-base font-semibold">Actions</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="venue in filteredVenues" :key="venue._id">
-        <td>{{ venue.room }}</td>
-        <td>{{ venue.location?.building || 'N/A' }}</td>
-        <td>{{ venue.location?.floor || 'N/A' }}</td>
-        <td>{{ venue.description || 'N/A' }}</td>
-        <td>{{ venue.capacity || 'N/A' }}</td>
-        <td>
-          <button @click="goToEditPage(venue._id)" class="edit-btn">Edit</button>
+      <tr v-for="venue in filteredVenues" :key="venue._id" class="hover:bg-gray-100">
+        <td class="p-3 border-b border-gray-300">{{ venue.room }}</td>
+        <td class="p-3 border-b border-gray-300">{{ venue.location?.building || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300">{{ venue.location?.floor || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300">{{ venue.description || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300">{{ venue.capacity || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300">
+          <button @click="goToEditPage(venue._id)" class="edit-btn px-3 py-2 bg-green-600 text-white text-sm font-semibold rounded-md transition-colors duration-300 hover:bg-green-700">Edit</button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 </template>
-
-<style scoped>
-.home-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.page-title {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  gap: 10px;
-}
-
-.search-input {
-  flex: 1;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.create-btn {
-  padding: 10px 20px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.logout-btn {
-  padding: 6px 12px;
-  background-color: #dc3545;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.create-btn:hover {
-  background-color: #0056b3;
-}
-
-.venues-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.venues-table th,
-.venues-table td {
-  padding: 12px 15px;
-  text-align: left;
-}
-
-.venues-table th {
-  background-color: #f4f4f4;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.venues-table td {
-  border-bottom: 1px solid #ddd;
-}
-
-.venues-table tr:hover {
-  background-color: #f9f9f9;
-}
-
-.edit-btn {
-  padding: 6px 12px;
-  background-color: #28a745;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.edit-btn:hover {
-  background-color: #218838;
-}
-</style>

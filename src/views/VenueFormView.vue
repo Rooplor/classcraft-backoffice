@@ -55,132 +55,35 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="venue-form-container">
-    <h2 class="form-title">{{ isEditMode ? 'Edit Venue' : 'Create Venue' }}</h2>
-    <form @submit.prevent="handleSubmit" class="venue-form">
-      <div class="form-group">
-        <label for="room">room:</label>
-        <input id="room" type="text" v-model="venue.room" placeholder="Enter venue room" required/>
+  <div class="venue-form-container max-w-md mx-auto my-10 p-8 rounded-lg bg-gray-100 shadow-lg">
+    <h2 class="form-title text-center text-2xl mb-5 text-gray-800">{{ isEditMode ? 'Edit Venue' : 'Create Venue' }}</h2>
+    <form @submit.prevent="handleSubmit" class="venue-form flex flex-col gap-4">
+      <div class="form-group flex flex-col">
+        <label for="room" class="font-semibold mb-2 text-gray-700">Room:</label>
+        <input id="room" type="text" v-model="venue.room" placeholder="Enter venue room" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
       </div>
-      <div class="form-group">
-        <label for="building">Building:</label>
-        <input id="building" type="text" v-model="venue.location.building" placeholder="Enter building name" required/>
+      <div class="form-group flex flex-col">
+        <label for="building" class="font-semibold mb-2 text-gray-700">Building:</label>
+        <input id="building" type="text" v-model="venue.location.building" placeholder="Enter building name" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
       </div>
-      <div class="form-group">
-        <label for="floor">Floor:</label>
-        <input id="floor" type="number" v-model="venue.location.floor" placeholder="Enter floor number" required/>
+      <div class="form-group flex flex-col">
+        <label for="floor" class="font-semibold mb-2 text-gray-700">Floor:</label>
+        <input id="floor" type="number" v-model="venue.location.floor" placeholder="Enter floor number" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
       </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" v-model="venue.description" placeholder="Enter description" required></textarea>
+      <div class="form-group flex flex-col">
+        <label for="description" class="font-semibold mb-2 text-gray-700">Description:</label>
+        <textarea id="description" v-model="venue.description" placeholder="Enter description" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 resize-vertical min-h-20"></textarea>
       </div>
-      <div class="form-group">
-        <label for="capacity">Capacity:</label>
-        <input id="capacity" type="number" v-model="venue.capacity" placeholder="Enter capacity" required/>
+      <div class="form-group flex flex-col">
+        <label for="capacity" class="font-semibold mb-2 text-gray-700">Capacity:</label>
+        <input id="capacity" type="number" v-model="venue.capacity" placeholder="Enter capacity" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
       </div>
-      <div class="form-group">
-        <label for="imageUrl">Image URL:</label>
-        <input id="imageUrl" type="text" v-model="venue.imageUrl" placeholder="Enter image URL" required/>
+      <div class="form-group flex flex-col">
+        <label for="imageUrl" class="font-semibold mb-2 text-gray-700">Image URL:</label>
+        <input id="imageUrl" type="text" v-model="venue.imageUrl" placeholder="Enter image URL" required class="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"/>
       </div>
-      <button type="submit" class="submit-btn">{{ isEditMode ? 'Update Venue' : 'Create Venue' }}</button>
-      <button v-if="isEditMode" @click="handleDeleteVenue" type="button" class="delete-btn">Delete Venue</button>
+      <button type="submit" class="submit-btn py-3 bg-blue-600 text-white font-bold rounded-md transition-colors duration-300 hover:bg-blue-700 active:scale-95">{{ isEditMode ? 'Update Venue' : 'Create Venue' }}</button>
+      <button v-if="isEditMode" @click="handleDeleteVenue" type="button" class="delete-btn py-3 bg-red-600 text-white font-bold rounded-md transition-colors duration-300 hover:bg-red-700 active:scale-95">Delete Venue</button>
     </form>
   </div>
 </template>
-
-<style scoped>
-.venue-form-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-title {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.venue-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-label {
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #555;
-}
-
-input[type="text"],
-input[type="number"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-input:focus,
-textarea:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-.submit-btn {
-  padding: 12px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.submit-btn:hover {
-  background: #0056b3;
-}
-
-.submit-btn:active {
-  transform: scale(0.98);
-}
-
-.delete-btn {
-  padding: 10px;
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.delete-btn:hover {
-  background: #c82333;
-}
-
-.delete-btn:active {
-  transform: scale(0.98);
-}
-</style>
