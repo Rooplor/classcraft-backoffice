@@ -1,4 +1,4 @@
-name: deploy-qa Pipeline
+name: deploy-prod Pipeline
 
 on: workflow_dispatch
 
@@ -113,20 +113,20 @@ jobs:
         run: |
           sshpass -p "$REMOTE_PASSWORD" ssh -t -o StrictHostKeyChecking=no -p 22 $REMOTE_USER@$REMOTE_HOST << 'EOF'
             cd /home/sysadmin
-            rm -rf distQA
-            rm -rf bffQA
+            rm -rf dist
+            rm -rf bff
           EOF
 
       - name: Copy front-end build files to VM
         run: |
-          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/distQA
+          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r dist ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/dist
 
       - name: Copy back-end files to VM
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "Copying files to VM..."
-          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bffQA
+          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bff
           echo "Files copied successfully."
 
       - name: Deploy to server
@@ -137,6 +137,6 @@ jobs:
         run: |
           sshpass -p "$REMOTE_PASSWORD" ssh -t -o StrictHostKeyChecking=no -p 22 $REMOTE_USER@$REMOTE_HOST << 'EOF'
             cd /home/sysadmin
-            docker compose -p classcraft-backoffice-qa -f compose.backoffice.qa.yaml down || true
-            docker compose -p classcraft-backoffice-qa -f compose.backoffice.qa.yaml up -d
+            docker compose -p classcraft-backoffice -f compose.backoffice.yaml down || true
+            docker compose -p classcraft-backoffice -f compose.backoffice.yaml up -d
           EOF
