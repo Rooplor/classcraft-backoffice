@@ -1,4 +1,4 @@
-name: deploy-prod Pipeline
+name: deploy-qa Pipeline
 
 on: workflow_dispatch
 
@@ -81,6 +81,13 @@ jobs:
 
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
+
+      - name: Connect to VPN
+        uses: "kota65535/github-openvpn-connect-action@v2"
+        with:
+          config_file: .github/workflows/sitst-client.ovpn
+          username: ${{ secrets.VPN_USERNAME }}
+          password: ${{ secrets.VPN_PASSWORD }}
 
       - name: Setup SSH
         env:
