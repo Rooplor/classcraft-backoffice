@@ -22,68 +22,20 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form @submit.prevent="handleLogin">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" v-model="username" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" required />
-      </div>
-      <button type="submit" class="login-button">Login</button>
-    </form>
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="login-container max-w-md mx-auto p-5 border border-gray-300 rounded-lg shadow-md bg-white">
+      <h2 class="text-center mb-5 text-2xl font-semibold">Login</h2>
+      <form @submit.prevent="handleLogin">
+        <div class="form-group mb-4">
+          <label for="username" class="block mb-2">Username:</label>
+          <input type="text" v-model="username" required class="w-full p-2 border border-gray-300 rounded-md" />
+        </div>
+        <div class="form-group mb-4">
+          <label for="password" class="block mb-2">Password:</label>
+          <input type="password" v-model="password" required class="w-full p-2 border border-gray-300 rounded-md" />
+        </div>
+        <button type="submit" class="login-button w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">Login</button>
+      </form>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-</style>
