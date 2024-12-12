@@ -42,7 +42,7 @@ const goToCreatePage = () => {
     <div class="container">
       <button @click="logout" class="logout-btn">Logout</button>
     </div>
-    <h1 class="page-title">Venue Management Test Edit</h1>
+    <h1 class="page-title">Venue Management</h1>
     <div class="actions">
       <input
           type="text"
