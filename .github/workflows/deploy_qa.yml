@@ -136,6 +136,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
         run: |
           sshpass -p "$REMOTE_PASSWORD" ssh -t -o StrictHostKeyChecking=no -p 22 $REMOTE_USER@$REMOTE_HOST << 'EOF'
+            sleep 30
             cd /home/sysadmin
             docker compose -p classcraft-backoffice-qa -f compose.backoffice.qa.yaml down || true
             docker compose -p classcraft-backoffice-qa -f compose.backoffice.qa.yaml up -d --build
