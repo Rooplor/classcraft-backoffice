@@ -25,7 +25,7 @@ jobs:
       - name: Inject environment variables
         run: |
           touch .env
-          echo "BASE_URL=${{ secrets.BASE_URL_QA }}" >> .env
+          echo "VITE_API_BASE_URL=${{ secrets.BASE_URL }}" >> .env
 
       - name: Build front-end
         run: |
@@ -36,7 +36,7 @@ jobs:
           cd bff
           touch .env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
-          echo "MONGO_URI=${{ secrets.MONGO_URI_QA }}" >> .env
+          echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> .env
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
 
       - name: Install dependencies for back-end
