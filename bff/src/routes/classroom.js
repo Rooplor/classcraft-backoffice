@@ -30,7 +30,7 @@ router.delete('/class/:id', async (req, res) => {
         const { id } = req.params;
         const db = await connectToDatabase();
         await db.collection('class').deleteOne({ _id: new ObjectId(id) });
-        await logAction('delete', req.user.username);
+        await logAction('delete classroom', req.user.username);
         res.status(200).send('Class deleted');
     } catch (e) {
         res.status(500).send(e.message);

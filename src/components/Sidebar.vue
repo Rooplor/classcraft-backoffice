@@ -24,7 +24,7 @@ const logout = () => {
         Venue
       </router-link>
       <router-link
-          to="/class"
+          to="/classroom"
           class="p-4 text-lg font-medium hover:bg-gray-300 hover:text-blue-500 transition"
           exact-active-class="bg-blue-500 text-white"
       >

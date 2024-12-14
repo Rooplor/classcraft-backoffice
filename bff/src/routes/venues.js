@@ -32,7 +32,7 @@ router.post('/venue', async (req, res) => {
         const newVenue = { room, location, description, capacity, imageUrl };
         const db = await connectToDatabase();
         await db.collection('venue').insertOne(newVenue);
-        await logAction('create', req.user.username);
+        await logAction('create venue', req.user.username);
         res.status(201).send('Venue created');
     } catch (e) {
         res.status(500).send(e.message);
@@ -60,7 +60,7 @@ router.put('/venue/:id', async (req, res) => {
         }
 
         await db.collection('venue').updateOne({ _id: new ObjectId(id) }, { $set: updatedVenue });
-        await logAction('update', req.user.username, differences);
+        await logAction('update venue', req.user.username, differences);
 
         res.status(200).send('Venue updated');
     } catch (e) {
@@ -73,7 +73,7 @@ router.delete('/venue/:id', async (req, res) => {
         const { id } = req.params;
         const db = await connectToDatabase();
         await db.collection('venue').deleteOne({ _id: new ObjectId(id) });
-        await logAction('delete', req.user.username);
+        await logAction('delete venue', req.user.username);
         res.status(200).send('Venue deleted');
     } catch (e) {
         res.status(500).send(e.message);
