@@ -8,7 +8,7 @@ const logsRoutes = require('./routes/logs');
 const authenticateToken = require('./middleware/auth');
 require('dotenv').config();
 const app = express();
-const port = 3500;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
