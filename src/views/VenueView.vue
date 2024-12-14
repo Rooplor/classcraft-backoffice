@@ -15,11 +15,6 @@ const fetchVenues = async () => {
   }
 }
 
-const logout = () => {
-  localStorage.removeItem('token')
-  router.push('/login')
-}
-
 onMounted(fetchVenues)
 
 const filteredVenues = computed(() => {
@@ -39,9 +34,6 @@ const goToCreatePage = () => {
 
 <template>
   <div class="home-container p-5 max-w-5xl mx-auto bg-white shadow-md rounded-lg">
-    <div class="container flex justify-end">
-      <button @click="logout" class="logout-btn px-3 py-2 bg-red-600 text-white text-sm font-semibold rounded-md transition-colors duration-300 hover:bg-red-700">Logout</button>
-    </div>
     <h1 class="page-title text-2xl font-semibold text-center mb-5 text-gray-800">Venue Management</h1>
     <div class="actions flex justify-between mb-5 gap-2">
       <input
@@ -65,11 +57,11 @@ const goToCreatePage = () => {
       </thead>
       <tbody>
       <tr v-for="venue in filteredVenues" :key="venue._id" class="hover:bg-gray-100">
-        <td class="p-3 border-b border-gray-300">{{ venue.room }}</td>
-        <td class="p-3 border-b border-gray-300">{{ venue.location?.building || 'N/A' }}</td>
-        <td class="p-3 border-b border-gray-300">{{ venue.location?.floor || 'N/A' }}</td>
-        <td class="p-3 border-b border-gray-300">{{ venue.description || 'N/A' }}</td>
-        <td class="p-3 border-b border-gray-300">{{ venue.capacity || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300 truncate max-w-xs">{{ venue.room }}</td>
+        <td class="p-3 border-b border-gray-300 truncate max-w-xs">{{ venue.location?.building || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300 truncate max-w-xs">{{ venue.location?.floor || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300 truncate max-w-xs">{{ venue.description || 'N/A' }}</td>
+        <td class="p-3 border-b border-gray-300 truncate max-w-xs">{{ venue.capacity || 'N/A' }}</td>
         <td class="p-3 border-b border-gray-300">
           <button @click="goToEditPage(venue._id)" class="edit-btn px-3 py-2 bg-green-600 text-white text-sm font-semibold rounded-md transition-colors duration-300 hover:bg-green-700">Edit</button>
         </td>

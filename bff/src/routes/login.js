@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
     const db = await connectToDatabase();
     const user = await db.collection('user').findOne({ username });
     if (user && await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ username: user.username, role: user.role }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, role: user.role }, secretKey);
         res.status(200).json({ message: 'Login successful', token });
     } else {
         res.status(401).send('Invalid credentials');

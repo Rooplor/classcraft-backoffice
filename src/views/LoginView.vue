@@ -23,7 +23,7 @@ const handleLogin = async () => {
 
 <template>
   <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="login-container max-w-md mx-auto p-5 border border-gray-300 rounded-lg shadow-md bg-white">
+    <div class="login-container max-w-md mx-auto p-5 border border-gray-300 w-[75%] md:w-[50%] rounded-2xl shadow-md bg-white">
       <h2 class="text-center mb-5 text-2xl font-semibold">Login</h2>
       <form @submit.prevent="handleLogin">
         <div class="form-group mb-4">

@@ -30,11 +30,14 @@ const fetchVenue = async () => {
 }
 
 const handleDeleteVenue = async () => {
-  try {
-    await deleteVenue(route.params.id)
-    router.push('/')
-  } catch (error) {
-    console.error('Error deleting venue:', error)
+  const confirmed = window.confirm('Are you sure you want to delete this venue?')
+  if (confirmed) {
+    try {
+      await deleteVenue(route.params.id)
+      router.push('/')
+    } catch (error) {
+      console.error('Error deleting venue:', error)
+    }
   }
 }
 
