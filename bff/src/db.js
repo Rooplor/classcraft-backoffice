@@ -3,6 +3,11 @@ require('dotenv').config();
 
 const uri = process.env.MONGO_URI;
 const dbName = process.env.DB_NAME;
+
+if (!uri) {
+    throw new Error('MongoDB connection string is not defined');
+}
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let db;

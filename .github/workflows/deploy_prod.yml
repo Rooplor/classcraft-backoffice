@@ -138,5 +138,5 @@ jobs:
           sshpass -p "$REMOTE_PASSWORD" ssh -t -o StrictHostKeyChecking=no -p 22 $REMOTE_USER@$REMOTE_HOST << 'EOF'
             cd /home/sysadmin
             docker compose -p classcraft-backoffice -f compose.backoffice.yaml down || true
-            docker compose -p classcraft-backoffice -f compose.backoffice.yaml up -d
+            docker compose -p classcraft-backoffice -f compose.backoffice.yaml up -d --build
           EOF
