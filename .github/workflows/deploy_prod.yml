@@ -128,6 +128,7 @@ jobs:
         run: |
           echo "Copying files to VM..."
           sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bff
+          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 bff/.env ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bff/.env
           echo "Files copied successfully."
 
       - name: Deploy to server

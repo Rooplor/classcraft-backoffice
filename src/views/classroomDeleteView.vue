@@ -45,7 +45,7 @@ onMounted(fetchClassroom)
         </tr>
         <tr class="border-b border-gray-300">
           <th class="p-4 bg-gray-100 font-medium">Details</th>
-          <td class="p-4">{{ classroom?.details }}</td>
+          <td class="p-4" v-html="classroom?.details"></td>
         </tr>
         <tr class="border-b border-gray-300">
           <th class="p-4 bg-gray-100 font-medium">Target</th>
@@ -71,10 +71,10 @@ onMounted(fetchClassroom)
           <th class="p-4 bg-gray-100 font-medium">Dates</th>
           <td class="p-4">
             <ul class="list-disc ml-4">
-              <li v-for="date in classroom?.dates" :key="date.dates.startDateTime">
-                <span class="font-medium">Start:</span> {{ new Date(date?.dates?.startDateTime).toLocaleString() }},
-                <span class="font-medium">End:</span> {{ new Date(date?.dates?.endDateTime).toLocaleString() }},
-                <span class="font-medium">Venue ID:</span> {{ date?.venueId?.join(', ') }}
+              <li v-for="date in classroom?.dates" :key="date?.date?.startDateTime">
+                <span class="font-medium">Start:</span> {{ date?.date?.startDateTime ? new Date(date.date.startDateTime).toLocaleString() : 'N/A' }},
+                <span class="font-medium">End:</span> {{ date?.date?.endDateTime ? new Date(date.date.endDateTime).toLocaleString() : 'N/A' }},
+                <span class="font-medium">Venue ID:</span> {{ date?.venueId?.join(', ') || 'N/A' }}
               </li>
             </ul>
           </td>
@@ -121,11 +121,11 @@ onMounted(fetchClassroom)
         </tr>
         <tr class="border-b border-gray-300">
           <th class="p-4 bg-gray-100 font-medium">Created When</th>
-          <td class="p-4">{{ new Date(classroom?.createdWhen?.$date).toLocaleString() }}</td>
+          <td class="p-4">{{ classroom?.createdWhen ? new Date(classroom.createdWhen).toLocaleString() : 'N/A' }}</td>
         </tr>
         <tr class="border-b border-gray-300">
           <th class="p-4 bg-gray-100 font-medium">Updated When</th>
-          <td class="p-4">{{ new Date(classroom?.updatedWhen?.$date).toLocaleString() }}</td>
+          <td class="p-4">{{ classroom?.updatedWhen ? new Date(classroom.updatedWhen).toLocaleString() : 'N/A' }}</td>
         </tr>
         <tr class="border-b border-gray-300">
           <th class="p-4 bg-gray-100 font-medium">Owner</th>
