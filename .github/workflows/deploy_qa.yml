@@ -127,8 +127,12 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "Copying files to VM..."
+          touch bff/.env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> bff/.env
+          echo "MONGO_URI=${{ secrets.MONGO_URI_QA }}" >> bff/.env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> bff/.env
+          echo "PORT=${{ secrets.PORT_QA }}" >> bff/.env
           sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 -r bff ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bffQA
-          sshpass -p "${{ secrets.REMOTE_PASSWORD }}" scp -P 22 bff/.env ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/sysadmin/bffQA/.env
           echo "Files copied successfully."
 
       - name: Deploy to server
