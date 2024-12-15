@@ -1,4 +1,3 @@
-// src/layout.js
 import DefaultLayout from './layouts/DefaultLayout.vue'
 import AuthLayout from './layouts/AuthLayout.vue'
 
